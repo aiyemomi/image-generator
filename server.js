@@ -1,35 +1,21 @@
-const express = require('express');
+const express = require("express");
 
-const path = require('path');
+const imageRouter = require("./routes/image");
 
-const axios = require('axios');
+const path = require("path");
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use("/", imageRouter);
 
+app.use(express.static(path.join(__dirname, "public")));
 
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
-app.set('views', path.join(__dirname, '/views'))
+app.set("views", path.join(__dirname, "/views"));
 
-app.get('/', (req, res) => {
-  res.render("home", {})
-})
-app.get('/meme-generator', (req, res) => {
-  res.render("meme-generator", {})
-})
-
-app.post('/', (req, res) => {
-  res.redirect("/meme-generator")
-})
-
-app.post('/meme-generator', (req, res) => {
-  res.redirect("/")
-})
 const port = 3000;
+
 app.listen(port, () => {
   console.log(`server has started on port ${port}`);
-})
-
-
+});
